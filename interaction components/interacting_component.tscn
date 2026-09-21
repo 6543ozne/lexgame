@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://ksutu4wl3vba"]
+
+[ext_resource type="Script" uid="uid://q5wg2etxw5hq" path="res://interaction components/interacting_component.gd" id="1_15of3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 8.062258
+
+[sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
+font_size = 12
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[node name="InteractingComponent" type="Node2D" unique_id=691199733]
+script = ExtResource("1_15of3")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1450639337]
+z_index = 10
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2064765137]
+shape = SubResource("CircleShape2D_g4v7s")
+
+[node name="InteraxtLabel" type="Label" parent="Area2D/CollisionShape2D" unique_id=1253939273]
+offset_left = -47.0
+offset_top = -60.0
+offset_right = 47.0
+offset_bottom = -37.0
+text = "E to interact"
+label_settings = SubResource("LabelSettings_g4v7s")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

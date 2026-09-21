@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://sh17tsjjjeqh"]
+
+[ext_resource type="Texture2D" uid="uid://dgibo5fs1gey0" path="res://icon.svg" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://mxugdp36s4yk" path="res://Character.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="3_1bvp3"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_lquwl"]
+[ext_resource type="Script" uid="uid://dimvdouy8g0sv" path="res://addons/phantom_camera/scripts/resources/phantom_camera_noise_2d.gd" id="5_272bh"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://bhd4nuiu23e7l" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_noise_emitter_2d.gd" id="6_5vw27"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(128, 128)
+
+[sub_resource type="Resource" id="Resource_7mycd"]
+script = ExtResource("4_lquwl")
+
+[sub_resource type="Resource" id="Resource_g4v7s"]
+script = ExtResource("5_272bh")
+frequency = 10.421
+noise_seed = 72
+positional_multiplier_y = 0.0
+metadata/_custom_type_script = "uid://dimvdouy8g0sv"
+
+[node name="Node2D" type="Node2D" unique_id=872026970]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1961885168]
+position = Vector2(304, 408)
+scale = Vector2(7.2, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=2005895876]
+texture = ExtResource("1_ig7tw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1104700819]
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Lex" type="Node" parent="." unique_id=1644933298]
+
+[node name="CharacterBody2D" parent="Lex" unique_id=1836362292 instance=ExtResource("2_0xm2m")]
+position = Vector2(173, 270)
+
+[node name="PhantomCamera2D" type="Node2D" parent="Lex" unique_id=829404136 node_paths=PackedStringArray("follow_target")]
+top_level = true
+position = Vector2(173, 270)
+script = ExtResource("3_1bvp3")
+follow_mode = 1
+follow_target = NodePath("../CharacterBody2D")
+tween_resource = SubResource("Resource_7mycd")
+draw_limits = true
+_preview_noise = false
+noise_emitter_layer = 1
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+
+[node name="PhantomCameraNoiseEmitter2D" type="Node2D" parent="Lex" unique_id=827158072]
+script = ExtResource("6_5vw27")
+noise = SubResource("Resource_g4v7s")
+duration = 0.517
+metadata/_custom_type_script = "uid://bhd4nuiu23e7l"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1733417445]
+physics_interpolation_mode = 1
+top_level = true
+position = Vector2(173, 270)
+editor_draw_limits = true
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D" unique_id=793527738]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("5_lquwl")
+metadata/_custom_type_script = "uid://bd046eokvcnu2"
+
+[connection signal="on_dash" from="Lex/CharacterBody2D" to="Lex" method="_on_character_body_2d_on_dash"]

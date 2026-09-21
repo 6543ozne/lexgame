@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://ynp0qi4kpqyo"]
+
+[ext_resource type="Script" uid="uid://bqqox0e0smwgu" path="res://static_body_2d.gd" id="1_xu2nb"]
+[ext_resource type="Texture2D" uid="uid://cl540r1ofiyvw" path="res://Sprites/tammynpc.png" id="2_o35xi"]
+[ext_resource type="PackedScene" uid="uid://clext4ed0gcbk" path="res://interaction components/interactable.tscn" id="3_50jmb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yf5fn"]
+size = Vector2(20, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chhsn"]
+atlas = ExtResource("2_o35xi")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_csql0"]
+atlas = ExtResource("2_o35xi")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_chhsn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_csql0")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 24.186773
+
+[node name="StaticBody2D" type="StaticBody2D" unique_id=772089845]
+script = ExtResource("1_xu2nb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1638649540]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_yf5fn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1919091071]
+sprite_frames = SubResource("SpriteFrames_g4v7s")
+
+[node name="Interactable" parent="." unique_id=1281914569 instance=ExtResource("3_50jmb")]
+interact_name = "Talk to tammy"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" unique_id=1967307606]
+shape = SubResource("CircleShape2D_g4v7s")

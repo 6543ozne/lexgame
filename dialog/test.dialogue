@@ -1,0 +1,13 @@
+~ start
+Tammy: [[Hi|Hello|Howdy]] Lex!
+Lex: Oh god, you're here too?
+- What is this place
+	Tammy: I dunno, looks like a testing place!
+	Tammy: I think the game is unfinished
+- What do i do here?
+	Tammy: Try killing my clones! Theyre mindless anyways! Press z to KILL!
+	Lex: Thats cool
+- Start again => start
+- End the conversation => END
+Tammy:  Have fun!
+=> END
