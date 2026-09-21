@@ -4,11 +4,12 @@ extends CharacterBody2D
 @onready var SPRITE = $AnimatedSprite2D
 @onready var SLASH_SPRITE = $Node2D/Area2D/AnimatedSprite2D2
 @onready var dash_timer = $Dashtimer
+@onready var label: Label = $Label
 
 const BASE_SPEED = 200.0
 const DASH_SPEED = 600.0
 const JUMP_VELOCITY = -400.0
-const FRICTION = 20
+const FRICTION = 10
 
 var direction: float = 0.0
 var jump_requested: bool = false
@@ -16,7 +17,7 @@ var dash_requested: bool = false
 var can_dash: bool = true
 var is_dashing: bool = false
 var dash_direction: float = 0.0
-
+var can_move: bool = true
 signal on_dash
 
 
@@ -38,6 +39,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	label.text = str(direction)
+	DialogueManager.dialogue_started.connect(func(_resource): can_move = false )
+	DialogueManager.dialogue_ended.connect(func(_resource): can_move = true)
+
 	# Gravity & Ground state
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -58,6 +63,8 @@ func _physics_process(delta: float) -> void:
 		dash_requested = false # Reset flag after processing
 
 	# Movement calculation
+	if not can_move:
+		direction = 0
 	if is_dashing:
 		velocity.x = dash_direction * DASH_SPEED
 	elif direction != 0:
@@ -66,8 +73,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, FRICTION)
 
 	# Squash & Stretch recovery
-	SPRITE.scale.x = move_toward(SPRITE.scale.x, 1.0, 3 * delta)
-	SPRITE.scale.y = move_toward(SPRITE.scale.y, 1.0, 3 * delta)
+	SPRITE.scale.x = lerpf(SPRITE.scale.x, 1.0, 5 * delta)
+	SPRITE.scale.y = lerpf(SPRITE.scale.y, 1.0, 5 * delta)
 
 	sprite_stuff()
 	move_and_slide()
@@ -109,3 +116,7 @@ func _on_dashtimer_timeout() -> void:
 
 func _on_animated_sprite_2d_2_animation_finished() -> void:
 	$Node2D/Area2D.monitoring = false
+
+func bounce(bounce_force) -> void:
+	velocity.y = bounce_force
+	SPRITE.scale = Vector2(0.3, 1.8)

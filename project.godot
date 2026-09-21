@@ -22,7 +22,7 @@ DialogueManager="*uid://c3rodes2l3gxb"
 
 [dialogue_manager]
 
-runtime/balloon_path="res://baloon/balloon.tscn"
+runtime/balloon_path="res://balloon/balloon.tscn"
 
 [display]
 
@@ -39,6 +39,10 @@ movie_writer/movie_file="C:/Users/Lorenzo/Documents/lexgame/sofedofn.avi"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
+
+[global_group]
+
+bounceable=""
 
 [input]
 

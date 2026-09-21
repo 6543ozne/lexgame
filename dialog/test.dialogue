@@ -1,12 +1,20 @@
 ~ start
 Tammy: [[Hi|Hello|Howdy]] Lex!
 Lex: Oh god, you're here too?
+~ question
+Tammy: What do you wanna talk about?
 - What is this place
-	Tammy: I dunno, looks like a testing place!
-	Tammy: I think the game is unfinished
+	Lex: So, where exactly are we?
+	Tammy: Looks to me like some testing place, made to test different mechanics of the game!
+	Tammy: Pretty sure most of this is a work in progress, but more is to come!
+	Lex: ... Game?
+	Lex: What are you even talking about?
+	Tammy: :3
+	=> question
 - What do i do here?
-	Tammy: Try killing my clones! Theyre mindless anyways! Press z to KILL!
+	Tammy: Try killing my evil clones! Theyre dont have feelings anyways! Press z to [shake rate=20 level=10]KILL![/shake]
 	Lex: Thats cool
+	=> question
 - Start again => start
 - End the conversation => END
 Tammy:  Have fun!

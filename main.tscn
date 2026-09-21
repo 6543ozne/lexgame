@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://bhd4nuiu23e7l" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_noise_emitter_2d.gd" id="6_5vw27"]
 [ext_resource type="PackedScene" uid="uid://cowjgncrn7lti" path="res://tammy.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://ynp0qi4kpqyo" path="res://Tammy_Npc.tscn" id="11_efxa6"]
+[ext_resource type="PackedScene" uid="uid://hiif2cqe1q0c" path="res://bouncecomponent.tscn" id="12_dg77c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(128, 128)
@@ -26,12 +27,16 @@ noise_seed = 136
 positional_multiplier_x = 0.0
 metadata/_custom_type_script = "uid://dimvdouy8g0sv"
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yf5fn"]
+size = Vector2(128, 128)
+
 [node name="Node2D" type="Node2D" unique_id=872026970]
 script = ExtResource("1_4c57u")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1961885168]
 position = Vector2(304, 408)
-scale = Vector2(7.2, 1)
+scale = Vector2(14.399999, 1)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=2005895876]
 texture = ExtResource("1_ig7tw")
@@ -113,5 +118,16 @@ position = Vector2(533, 272)
 
 [node name="StaticBody2D4" parent="." unique_id=772089845 instance=ExtResource("11_efxa6")]
 position = Vector2(263, 328)
+
+[node name="Bouncy" parent="." unique_id=628687421 instance=ExtResource("12_dg77c")]
+position = Vector2(507.00003, 331)
+scale = Vector2(0.19999999, 0.19999999)
+bounciness = -700.0
+
+[node name="Icon" type="Sprite2D" parent="Bouncy" unique_id=1598558644]
+texture = ExtResource("1_ig7tw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bouncy" unique_id=431771113]
+shape = SubResource("RectangleShape2D_yf5fn")
 
 [connection signal="on_dash" from="Node/CharacterBody2D" to="Node" method="_on_character_body_2d_on_dash"]

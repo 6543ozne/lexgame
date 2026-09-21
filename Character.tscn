@@ -132,9 +132,22 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yf5fn"]
-radius = 16.03122
+radius = 22.0
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1836362292]
+[sub_resource type="Curve" id="Curve_e24yd"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(0.5379939, 0.8493976), 0.0, 0.0, 0, 0, Vector2(0.9969605, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_5gddd"]
+offsets = PackedFloat32Array(0, 0.5692568, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.964527, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_o6gdn"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1836362292 groups=["bounceable"]]
 collision_layer = 4
 script = ExtResource("1_7ig0a")
 
@@ -165,7 +178,7 @@ animation = &"slash"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D" unique_id=1701421088]
-position = Vector2(6, 12)
+position = Vector2(2, 11)
 shape = SubResource("CircleShape2D_yf5fn")
 
 [node name="Icon" type="Sprite2D" parent="Node2D" unique_id=1237107415]
@@ -175,6 +188,36 @@ scale = Vector2(0.13021518, 0.13021518)
 texture = ExtResource("4_atbvg")
 
 [node name="InteractingComponent" parent="." unique_id=691199733 instance=ExtResource("6_e24yd")]
+
+[node name="Label" type="Label" parent="." unique_id=14807477]
+offset_left = 41.0
+offset_top = -34.0
+offset_right = 81.0
+offset_bottom = -11.0
+text = "aaaa"
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=634444096]
+unique_name_in_owner = true
+z_index = 5
+emitting = false
+amount = 10
+lifetime = 0.47
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+randomness = 0.64
+local_coords = true
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+scale_amount_max = 11.07
+scale_amount_curve = SubResource("Curve_e24yd")
+color = Color(0.99999994, 0.21730375, 0.9193817, 1)
+color_ramp = SubResource("Gradient_5gddd")
+hue_variation_min = -1.0
+hue_variation_max = -0.82
+hue_variation_curve = SubResource("Curve_o6gdn")
 
 [connection signal="timeout" from="Dashtimer" to="." method="_on_dashtimer_timeout"]
 [connection signal="body_entered" from="Node2D/Area2D" to="Node2D/Area2D" method="_on_body_entered"]

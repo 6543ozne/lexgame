@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://hiif2cqe1q0c"]
+
+[ext_resource type="Script" uid="uid://cwy4n7rsdaj6a" path="res://bouncy.gd" id="1_ekl1t"]
+
+[node name="Bouncy" type="Area2D" unique_id=628687421]
+collision_mask = 6
+script = ExtResource("1_ekl1t")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
